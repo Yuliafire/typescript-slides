@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>What is TypeScript</h1>
+					<div>TypeScript, a superset of JavaScript developed by Microsoft,
+						is a statically typed language that compiles to plain JavaScript.
+						By introducing static typing, TypeScript enhances the development
+						experience by detecting errors early in the development process and
+						providing improved tooling support.</div>
+				</section>
+				<section>
+					<h2>Why to use typescript?</h2>
+					<h3>Part 1</h3>
+					<div>
+						<ul>
+							<li>TypeScript's <strong>static typing</strong> feature enables early error detection and enhances
+								code quality and maintainability.</li>
+							<li>TypeScript offers <strong>superior tooling support</strong> with features like code
+								navigation, intelligent code completion, and refactoring tools, improving developer
+								productivity.</li>
+							<li>
+								TypeScript's support for <strong>object-oriented programming</strong> concepts
+								facilitates the development of scalable and maintainable codebases.</li>
+						</ul>
+					</div>
+				</section>
+				<section>
+					<h2>Why to use typescript?</h2>
+					<h3>Part 2</h3>
+					<div>
+						<ul>
+							<li>
+								TypeScript provides support for the latest ECMAScript features,
+								enabling developers to leverage modern JavaScript syntax and features.</li>
+							<li>TypeScript is fully compatible with existing JavaScript
+								codebases, allowing for seamless integration and incremental adoption.</li>
+						</ul>
+					</div>
+				</section>
+	
+				<section>
+					<h2>Disadvantages of TypeScript over JavaScript</h2>
+					<ul>
+						<li>TypeScript's static typing feature introduces
+							<em>a learning curve</em> for developers unfamiliar with static typing concepts.
+						</li>
+						<li>TypeScript requires a <em>compilation step</em> to convert
+							TypeScript code to JavaScript, adding complexity to the build process.</li>
+						<li>In smaller projects where the benefits of static typing are less
+							pronounced, the additional overhead of TypeScript may outweigh its advantages.</li>
+					</ul>
+				</section>
+	
+				<section>
+					<h2>Syntax Differences: JavaScript vs TypeScript</h2>
+					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
+					   let message = "Hello, World!";
+					   // Type is determined at runtime
+					   message = 42;
+					   // No error, as JavaScript allows dynamic typing
+					   console.log(message);
+					</pre>
+	
+					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
+					   let message: string = "Hello, World!";
+					   // Type is explicitly defined
+					   // message = 42; 
+					   // Error: Type 'number' is not assignable to type 'string'
+					   console.log(message);
+					</pre>
+				</section>
+	
+				<section>
+					<h2>Introduction to TypeScript Types</h2>
+					<p>TypeScript extends JavaScript by adding a rich type system.
+						While JavaScript primarily uses dynamic typing,
+						TypeScript introduces additional types such as enums, tuples,
+						and union/intersection types. These features enable developers
+						to write safer and more maintainable code.</p>
+				</section>
+	
+				<section>
+					<h2>Primitive types</h2>
+					<ul>
+						<li>boolean</li>
+						<li>number</li>
+						<li>string</li>
+						<li>bigint</li>
+						<li>symbol</li>
+						<li>undefined</li>
+						<li>null</li>
+					</ul>
+				</section>
+	
+				<section>
+					<h2>Special Types</h2>
+						<li>any</li>
+						<li>void</li>
+						<li>never</li>
+						<li>unknown</li>
+				</section>
+	
+				<section>
+					<h3>any</h3>
+					<p>The <code>any</code> type disables type checking, allowing any value to be assigned. It should be avoided as it defeats the purpose of TypeScript's type safety.</p>
+					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
+				let value: any;
+				value = "Hello"; // Valid
+				value = 42;      // Valid
+				value.toUpperCase(); // No compile-time error,
+					 but runtime error if value is not a string
+					</pre>
+				</section>
+				
+				<section>
+					<h3>unknown</h3>
+					<p>The <code>unknown</code> type is a safer alternative to <code>any</code>. It requires type checking before usage.</p>
+					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
+				let value: unknown = "Hello";
+				if (typeof value === "string") {
+					console.log(value.toUpperCase()); // Safe
+				}
+					</pre>
+				</section>
+				
+				<section>
+					<h3>never</h3>
+					<p>The <code>never</code> type represents values that never occur, such as functions that throw errors or infinite loops.</p>
+					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
+				function error(message: string): never {
+					throw new Error(message);
+				}
+					</pre>
+				</section>
+				
+				<section>
+					<h3>void</h3>
+					<p>The <code>void</code> type represents the absence of a value, typically used for functions that do not return anything.</p>
+					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
+				function logMessage(message: string): void {
+					console.log(message);
+				}
+					</pre>
+				</section>
+	
+	
+	
+				<section>
+					<h3>Union Types</h3>
+					<p>Union types allow a variable to hold values of multiple types.</p>
+					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
+				let value: string | number;
+				value = "Hello"; // Valid
+				value = 42;      // Valid
+				// value = true; // Error: Type 'boolean' is not assignable
+								 to type 'string | number'
+					</pre>
+	
+				</section>
+	
+				<section>
+					<h2>Intersection Types</h2>
+					<p>Intersection types combine multiple types into one. A variable must satisfy all the combined types.
+					</p>
+					<!-- <pre> -->
+	
+					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
+						interface Person {
+							name: string;
+						}
+						
+						interface Employee {
+							employeeId: number;
+						}
+						
+						type EmployeePerson = Person & Employee;
+						
+						const employee: EmployeePerson = {
+							name: "Alice",
+							employeeId: 123
+						};
+					</pre>
+				</section>
+	
+	
+	
+				<section>
+					<h2>Composite Types</h2>
+					<p>Composite types allow grouping multiple values together.</p>
+					<p>They include ARRAYS and TUPLES</p>
+				</section>
+	
+				<section>
+					<h3>Array</h3>
+					<p>An array is a collection of elements of the same type.</p>
+					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
+					let numbers: number[] = [1, 2, 3, 4];
+					numbers.push(5); // Valid
+					numbers.push("hello"); // Error: Argument of type 'string'
+					is not assignable to parameter of type 'number'
+					</pre>
+				</section>
+	
+				<section>
+					<h3>Tuple</h3>
+					<p>A tuple is a fixed-length array where each element can have a different type.</p>
+					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
+					let person: [string, number] = ["Alice", 25];
+					// person = [25, "Alice"]; // Error: Type 'number' is not assignable to type 'string'
+					</pre>
+				</section>
+	
+	
+				<section>
+					<h2>Enum Types</h2>
+					<p>Enums allow you to define a set of named constants.</p>
+					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
+					enum Color {
+						Red,
+						Green,
+						Blue
+					}
+	
+					let favoriteColor: Color = Color.Green;
+					console.log(favoriteColor); // Output: 1
+					</pre>
+				</section>
+	
+		
+				<section>
+					<h2>Real-World Impact</h2>
+					<ul>
+						<li>Fewer runtime errors</li>
+						<li>Faster debugging with type errors</li>
+						<li>Better collaboration in large teams</li>
+					</ul>
+				</section>
+				
+				<section>
+				  <h2>Summary</h2>
+				  <p>TypeScript offers several advantages over JS:</p>
+				<ul>
+				   <li><strong>Type Safety:</strong> Helps catch errors at compile time, reducing runtime bugs.</li>
+					<li><strong>Improved Code Readability:</strong> Explicit types make the code easier to understand and maintain.</li>
+					<li><strong>Enhanced Tooling:</strong> Provides better autocompletion, refactoring, and debugging support in IDEs.</li>
+					<li><strong>Scalability:</strong> Facilitates large-scale application development with features like interfaces and type annotations.</li>
+					<li><strong>Modern JavaScript Features:</strong> Supports ES6+ features and compiles to plain JavaScript for compatibility.</li>
+				 </ul>
+			   </section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
