@@ -1,379 +1,550 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-		<title>reveal.js</title>
-
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
-
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>
-					<h1>TypeScript: Unlocking Type Safety</h1>
-				</section>
-				<section>
-					<h2>What is TypeScript?</h2>
-					<div>TypeScript, a superset of JavaScript developed by Microsoft,
-						is a statically typed language that compiles to plain JavaScript.
-						By introducing static typing, TypeScript enhances the development
-						experience by detecting errors early in the development process and
-						providing improved tooling support.</div>
-				</section>
-				<section>
-					<h2>Why Use TypeScript?</h2>
-					<h3>Part 1</h3>
-					<div>
-						<ul>
-							<li>
-								<strong>Catch errors early:</strong> TypeScript's static typing helps you spot mistakes while writing code, making your projects more reliable and easier to maintain.
-							</li>
-							<li>
-								<strong>Boost productivity:</strong> With features like smart code navigation, auto-completion, and refactoring tools, TypeScript makes coding faster and more enjoyable.
-							</li>
-							<li>
-								<strong>Write scalable code:</strong> TypeScript supports object-oriented programming, helping you build clean, organized, and scalable applications.
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section>
-					<h2>Why use typescript?</h2>
-					<h3>Part 2</h3>
-					<div>
-						<ul>
-							<li>
-								TypeScript provides support for the latest ECMAScript features,
-								enabling developers to leverage modern JavaScript syntax and features.</li>
-							<li>TypeScript is fully compatible with existing JavaScript
-								codebases, allowing for seamless integration and incremental adoption.</li>
-						</ul>
-					</div>
-				</section>
-
-				<section>
-					<h2>Disadvantages of TypeScript over JavaScript</h2>
-					<ul>
-						<li>TypeScript's static typing feature introduces
-							<em>a learning curve</em> for developers unfamiliar with static typing concepts.
-						</li>
-						<li>TypeScript requires a <em>compilation step</em> to convert
-							TypeScript code to JavaScript, adding complexity to the build process.</li>
-						<li>In smaller projects where the benefits of static typing are less
-							pronounced, the additional overhead of TypeScript may outweigh its advantages.</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Syntax Differences: JavaScript vs TypeScript</h2>
-					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
-					   let message = "Hello, World!";
-					   // Type is determined at runtime
-					   message = 42;
-					   // No error, as JavaScript allows dynamic typing
-					   console.log(message);
-					</pre>
-
-					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
-					   let message: string = "Hello, World!";
-					   // Type is explicitly defined
-					   // message = 42;
-					   // Error: Type 'number' is not assignable to type 'string'
-					   console.log(message);
-					</pre>
-				</section>
-	
-				<section>
-					<h2>Introduction to TypeScript Types</h2>
-					<p>TypeScript extends JavaScript by adding a rich type system.
-						While JavaScript primarily uses dynamic typing,
-						TypeScript introduces additional types such as enums, tuples,
-						and union, intersection types. These features enable developers
-						to write safer and more maintainable code.</p>
-				</section>
-	
-				<section>
-					<h2>Primitive types</h2>
-					<ul>
-						<li>boolean</li>
-						<li>number</li>
-						<li>string</li>
-						<li>bigint</li>
-						<li>symbol</li>
-						<li>undefined</li>
-						<li>null</li>
-					</ul>
-				</section>
-	
-				<section>
-					<h2>Special Types</h2>
-						<li>any</li>
-						<li>void</li>
-						<li>never</li>
-						<li>unknown</li>
-				</section>
-	
-				<section>
-					<h3>any</h3>
-					<p>The <code>any</code> type disables type checking, allowing any value to be assigned. It should be avoided as it defeats the purpose of TypeScript's type safety.</p>
-					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
-				let value: any;
-				value = "Hello"; // Valid
-				value = 42;      // Valid
-				value.toUpperCase(); // No compile-time error,
-					 but runtime error if value is not a string
-					</pre>
-				</section>
-
-				<section>
-					<h3>unknown</h3>
-					<p>The <code>unknown</code> type is a safer alternative to <code>any</code>. It requires type checking before usage.</p>
-					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
-				let value: unknown = "Hello";
-				if (typeof value === "string") {
-					console.log(value.toUpperCase()); // Safe
-				}
-					</pre>
-				</section>
-
-				<section>
-					<h3>never</h3>
-					<p>The <code>never</code> type represents values that never occur, such as functions that throw errors or infinite loops.</p>
-					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
-				function error(message: string): never {
-					throw new Error(message);
-				}
-					</pre>
-				</section>
-
-				<section>
-					<h3>void</h3>
-					<p>The <code>void</code> type represents the absence of a value, typically used for functions that do not return anything.</p>
-					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
-				function logMessage(message: string): void {
-					console.log(message);
-				}
-					</pre>
-				</section>
-
-				<section>
-					<h2>Union Types</h2>
-					<p>
-						In TypeScript, a <strong>union type</strong> allows a value to be one of several specified types. It is useful when a variable can hold multiple types of values.
-					</p>
-					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
-						// Union type example
-						type StringOrNumber = string | number;
-
-						let value: StringOrNumber;
-
-						value = "Hello"; // Valid
-						value = 42;      // Valid
-						value = true;    // Invalid, not part of the union
-					</pre>
-				</section>
-
-				<section>
-					<h2>Intersection Types</h2>
-					<p>
-						An <strong>intersection type</strong> combines multiple types into one. A value of an intersection type must satisfy all the combined types simultaneously.
-					</p>
-					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
-						// Intersection type example
-						type Person = { name: string };
-						type Employee = { jobTitle: string };
-
-						type PersonEmployee = Person & Employee;
-						const employee: PersonEmployee = {
-							name: "Alice",
-							jobTitle: "Developer"
-						}; // Valid because it satisfies both `Person` and `Employee`
-					</pre>
-				</section>
-
-				<section>
-					<h2>Comparing Interfaces & Type Aliases</h2>
-					<p>
-						In TypeScript, both <code>interface</code> and <code>type</code> are used to define the structure of data. While they share similarities, they also have distinct features that make them suitable for different use cases. 
-					</p>
-					<p>
-						This guide explores the key differences between interfaces and type aliases, including their ability to extend, merge, and represent various types.
-					</p>
-				</section>
-
-				<section>
-					<h2>Interfaces Can Be Extended</h2>
-					<p>
-						<strong>Interfaces</strong> in TypeScript can be extended using the <code>extends</code> keyword. This allows you to create new interfaces by building on existing ones.
-					</p>
-					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
-						interface Person {
-							name: string;
-							age: number;
-						}
-				
-						interface Employee extends Person {
-							jobTitle: string;
-						}
-				
-						const employee: Employee = {
-							name: "Alice",
-							age: 30,
-							jobTitle: "Software Engineer"
-						};
-					</pre>
-				</section>
-				
-				<section>
-					<h2>Interfaces Support Declaration Merging</h2>
-					<p>
-						<strong>Interfaces</strong> can be reopened and merged. This means you can add new properties to an existing interface by declaring it again.
-					</p>
-					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
-						interface Person {
-							name: string;
-						}
-
-						// Declaration merging
-						interface Person {
-							middleName?: string;
-						}
-
-						const person: Person = {
-							name: "Alice",
-							middleName: "Marie"
-						};
-					</pre>
-				</section>
-
-				<section>
-					<h2>Type Aliases Can Represent Primitives, Unions, Tuples, and More</h2>
-					<p>
-						<strong>Type aliases</strong> are more flexible than interfaces. They can represent primitives, unions, tuples, and other complex types.
-					</p>
-					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
-						// Union type
-						type StringOrNumber = string | number;
-				
-						const value: StringOrNumber = 42;
-				
-						// Tuple type
-						type Point = [number, number];
-				
-						const point: Point = [10, 20];
-					</pre>
-				</section>
-	
-				<section>
-					<h3>Union Types</h3>
-					<p>Union types allow a variable to hold values of multiple types.</p>
-					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
-				let value: string | number;
-				value = "Hello"; // Valid
-				value = 42;      // Valid
-				// value = true; // Error: Type 'boolean' is not assignable
-								 to type 'string | number'
-					</pre>
-	
-				</section>
-	
-				<section>
-					<h2>Intersection Types</h2>
-					<p>Intersection types combine multiple types into one. A variable must satisfy all the combined types.
-					</p>
-	
-					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
-						interface Person {
-							name: string;
-						}
-
-						interface Employee {
-							employeeId: number;
-						}
-
-						type EmployeePerson = Person & Employee;
-						const employee: EmployeePerson = {
-							name: "Alice",
-							employeeId: 123
-						};
-					</pre>
-				</section>
-
-				<section>
-					<h2>Composite Types</h2>
-					<p>Composite types allow grouping multiple values together.</p>
-					<p>They include ARRAYS and TUPLES</p>
-				</section>
-
-				<section>
-					<h3>Array</h3>
-					<p>An array is a collection of elements of the same type.</p>
-					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
-					let numbers: number[] = [1, 2, 3, 4];
-					numbers.push(5); // Valid
-					numbers.push("hello"); // Error: Argument of type 'string'
-					is not assignable to parameter of type 'number'
-					</pre>
-				</section>
-
-				<section>
-					<h3>Tuple</h3>
-					<p>A tuple is a fixed-length array where each element can have a different type.</p>
-					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
-					let person: [string, number] = ["Alice", 25];
-					// person = [25, "Alice"]; // Error: Type 'number' is not assignable to type 'string'
-					</pre>
-				</section>
-
-				<section>
-					<h2>Enum Types</h2>
-					<p>Enums allow you to define a set of named constants.</p>
-					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
-					enum Color {
-						Red,
-						Green,
-						Blue
-					}
-					let favoriteColor: Color = Color.Green;
-					console.log(favoriteColor); // Output: 1
-					</pre>
-				</section>
-
-				<section>
-				  <h2>Summary</h2>
-				  <!-- <p>TypeScript offers several advantages over JS:</p> -->
-				<ul>
-				   <li><strong>Type Safety:</strong> Helps catch errors at compile time, reducing runtime bugs.</li>
-					<li><strong>Improved Code Readability:</strong> Explicit types make the code easier to understand and maintain.</li>
-					<li><strong>Enhanced Tooling:</strong> Provides better autocompletion, refactoring, and debugging support in IDEs.</li>
-					<li><strong>Scalability:</strong> Facilitates large-scale application development with features like interfaces and type annotations.</li>
-					<li><strong>Modern JavaScript Features:</strong> Supports ES6+ features and compiles to plain JS.</li>
-				 </ul>
-			   </section>
-			</div>
-		</div>
-
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
-
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TypeScript: Unlocking Type Safety</title>
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Roboto', system-ui, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #1e3a8a, #2dd4bf);
+            width: 100%;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        .reveal {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .reveal .slides {
+            width: 100%;
+            height: 100vh;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .reveal .slides section {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(240, 248, 255, 0.9));
+            border-radius: 1rem;
+            padding: 2vmin;
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease-in;
+            transition: all 0.3s ease;
+        }
+        .reveal .slides h1 {
+            color: #1e3a8a !important;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin: 1vmin auto;
+            text-align: center;
+        }
+        .reveal .slides section h2, .reveal .slides section h3 {
+            color: #1e3a8a !important;
+            font-weight: 700;
+            margin: 1vmin auto;
+            text-align: center;
+        }
+        .reveal .slides section h2 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+        }
+        .reveal .slides section h3 {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+        }
+        p, ul {
+            color: #1f2937;
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            line-height: 1.5;
+            margin: 1vmin auto;
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+            text-align: left;
+            max-width: 80%;
+        }
+        ul li {
+            position: relative;
+            padding-left: 1vmin;
+            margin-bottom: 0.5vmin;
+            text-align: left;
+        }
+        ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #2dd4bf;
+            font-weight: bold;
+            font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+        }
+        .reveal .slides pre {
+            background: #e5e7eb !important;
+            padding: 2vmin !important;
+            border-radius: 0.5rem;
+            max-width: 75%;
+            margin: 1vmin auto;
+            white-space: normal;
+            word-break: break-all;
+            overflow-wrap: break-word;
+            overflow: hidden !important;
+            overflow-x: hidden !important;
+            overflow-y: hidden !important;
+            max-height: none !important;
+            font-size: clamp(1rem, 1.8vw, 1.5rem);
+            line-height: 1.3;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        code {
+            font-family: 'Fira Code', 'Consolas', monospace;
+        }
+        div.content-box {
+            background: #d1d5db !important;
+            padding: 1.5vmin !important;
+            border-radius: 1rem;
+            max-width: 80%;
+            margin: 1vmin auto;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        div.content-box:hover {
+            transform: scale(1.03);
+            background: #b0b7c3 !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 1024px) {
+            .reveal .slides section { width: 92%; padding: 1.8vmin; }
+            .reveal .slides pre { max-width: 80%; }
+            div.content-box, ul { max-width: 85%; }
+        }
+        @media (max-width: 768px) {
+            .reveal .slides section { width: 95%; padding: 1.5vmin; }
+            .reveal .slides pre { max-width: 85%; }
+            div.content-box, ul { max-width: 90%; }
+            ul li { padding-left: 0.8vmin; }
+            ul li::before { font-size: clamp(0.7rem, 1.2vw, 1rem); }
+        }
+        @media (max-width: 480px) {
+            .reveal .slides section { width: 98%; padding: 1.2vmin; }
+            .reveal .slides pre { max-width: 70%; }
+            div.content-box, ul { max-width: 95%; }
+            ul li { padding-left: 0.6vmin; margin-bottom: 0.3vmin; }
+            ul li::before { font-size: clamp(0.6rem, 1vw, 0.8rem); }
+        }
+    </style>
+</head>
+<body style="background: linear-gradient(135deg, #1e3a8a, #2dd4bf); width: 100%; min-height: 100vh; overflow: hidden;">
+    <div class="reveal" role="presentation" aria-label="TypeScript Presentation">
+        <div class="slides">
+            <section role="region" aria-label="Title Slide">
+                <h1>TypeScript: Unlocking Type Safety</h1>
+            </section>
+            <section role="region" aria-label="What is TypeScript">
+                <h2>What is TypeScript?</h2>
+                <div class="content-box">
+                    <p>TypeScript, a superset of JavaScript developed by Microsoft, is a statically typed language that compiles to plain JavaScript.</p>
+                    <p>By introducing static typing, TypeScript enhances the development experience by detecting errors early and providing improved tooling support.</p>
+                </div>
+            </section>
+            <section role="region" aria-label="Why Use TypeScript Part 1">
+                <h2>Why Use TypeScript?</h2>
+                <h3>Part 1</h3>
+                <div class="content-box">
+                    <ul>
+                        <li><strong>Catch errors early:</strong> TypeScript's typing helps spot mistakes, making code reliable.</li>
+                        <li><strong>Boost productivity:</strong> Features like auto-completion make coding faster.</li>
+                        <li><strong>Write scalable code:</strong> Supports OOP for clean and organized applications.</li>
+                    </ul>
+                </div>
+            </section>
+            <section role="region" aria-label="Why Use TypeScript Part 2">
+                <h2>Why Use TypeScript?</h2>
+                <h3>Part 2</h3>
+                <div class="content-box">
+                    <ul>
+                        <li>TypeScript provides support for the latest ECMAScript features, enabling modern JavaScript syntax.</li>
+                        <li>TypeScript is fully compatible with existing JavaScript codebases, allowing seamless integration.</li>
+                    </ul>
+                </div>
+            </section>
+            <section role="region" aria-label="TypeScript Type System">
+                <h2>Understanding TypeScript's Type System</h2>
+                <div class="content-box">
+                    <p>TypeScript extends JavaScript by adding a rich type system. While JavaScript uses dynamic typing, TypeScript introduces enums, tuples, and union/intersection types for safer, maintainable code.</p>
+                </div>
+            </section>
+            <section role="region" aria-label="Primitive Types">
+                <h2>1. Primitive Types</h2>
+                <div class="content-box">
+                    <ul>
+                        <li>boolean</li>
+                        <li>number</li>
+                        <li>string</li>
+                        <li>bigint</li>
+                        <li>symbol</li>
+                        <li>undefined</li>
+                        <li>null</li>
+                    </ul>
+                </div>
+            </section>
+            <section role="region" aria-label="Special Types">
+                <h2>2. Special Types</h2>
+                <div class="content-box">
+                    <ul>
+                        <li>any</li>
+                        <li>void</li>
+                        <li>never</li>
+                        <li>unknown</li>
+                    </ul>
+                </div>
+            </section>
+            <section role="region" aria-label="Any Type">
+                <h3>any</h3>
+                <p>The <code>any</code> type disables type checking, allowing any value. Avoid it to maintain TypeScript's type safety.</p>
+                <pre>
+                    <code>let value: any;
+value = "Hello"; // Valid
+value = 42;      // Valid
+value.toUpperCase(); // No compile-time error, but runtime error if not string</code>
+                </pre>
+            </section>
+            <section role="region" aria-label="Unknown Type">
+                <h3>unknown</h3>
+                <p>The <code>unknown</code> type is a safer alternative to <code>any</code>, requiring type checking.</p>
+                <pre>
+                    <code>let value: unknown = "Hello";
+if (typeof value === "string") {
+    console.log(value.toUpperCase()); // Safe
+}</code>
+                </pre>
+            </section>
+            <section role="region" aria-label="Never Type">
+                <h3>never</h3>
+                <p>The <code>never</code> type represents values that never occur, like error-throwing functions.</p>
+                <pre>
+                    <code>function error(message: string): never {
+    throw new Error(message);
+}</code>
+                </pre>
+            </section>
+            <section role="region" aria-label="Void Type">
+                <h3>void</h3>
+                <p>The <code>void</code> type represents functions that return nothing.</p>
+                <pre>
+                    <code>function logMessage(message: string): void {
+    console.log(message);
+}</code>
+                </pre>
+            </section>
+            <section role="region" aria-label="Interfaces vs Type Aliases">
+                <h2>3. Comparing Interfaces & Type Aliases</h2>
+                <div class="content-box">
+                    <p><code>interface</code> and <code>type</code> define data structures but have distinct features.</p>
+                    <p>Explore their differences in extending, merging, and type representation.</p>
+                </div>
+            </section>
+            <section role="region" aria-label="Interface Extension">
+                <h2>Interfaces Can Be Extended</h2>
+                <p><strong>Interfaces</strong> use <code>extends</code> to build on existing ones.</p>
+                <pre>
+                    <code>interface Person {
+    name: string;
+    age: number;
+}
+interface Employee extends Person {
+    jobTitle: string;
+}
+const employee: Employee = {
+    name: "Alice",
+    age: 30,
+    jobTitle: "Software Engineer"
+};</code>
+                </pre>
+            </section>
+            <section role="region" aria-label="Interface Declaration Merging">
+                <h2>Interfaces Support Declaration Merging</h2>
+                <p><strong>Interfaces</strong> can be reopened to add properties.</p>
+                <pre>
+                    <code>interface Person {
+    name: string;
+}
+// Declaration merging
+interface Person {
+    middleName?: string;
+}
+const person: Person = {
+    name: "Alice",
+    middleName: "Marie"
+};</code>
+                </pre>
+            </section>
+            <section role="region" aria-label="Type Aliases Flexibility">
+                <h2>Type Aliases Can Represent Primitives, Unions, Tuples</h2>
+                <p><strong>Type aliases</strong> are flexible for primitives, unions, and tuples.</p>
+                <pre>
+                    <code>// Union type
+type StringOrNumber = string | number;
+const value: StringOrNumber = 42;
+// Tuple type
+type Point = [number, number];
+const point: Point = [10, 20];</code>
+                </pre>
+            </section>
+            <section role="region" aria-label="Composite Types">
+                <h2>4. Composite Types</h2>
+                <div class="content-box">
+                    <p>Composite types group multiple values.</p>
+                    <p>Includes ARRAYS, TUPLES, UNION, and INTERSECTION.</p>
+                </div>
+            </section>
+            <section role="region" aria-label="Array Type">
+                <h3>Array</h3>
+                <p>An array holds elements of the same type.</p>
+                <pre>
+                    <code>let numbers: number[] = [1, 2, 3, 4];
+numbers.push(5); // Valid
+numbers.push("hello"); // Error: Argument of type 'string' is not assignable</code>
+                </pre>
+            </section>
+            <section role="region" aria-label="Tuple Type">
+                <h3>Tuple</h3>
+                <p>A tuple is a fixed-length array with different types.</p>
+                <pre>
+                    <code>let person: [string, number] = ["Alice", 25];
+// person = [25, "Alice"]; // Error: Type 'number' is not assignable to type 'string'</code>
+                </pre>
+            </section>
+            <section role="region" aria-label="Union Types">
+                <h2>Union Types</h2>
+                <p>A <strong>union type</strong> allows a value to be one of several types.</p>
+                <pre>
+                    <code>type StringOrNumber = string | number;
+let value: StringOrNumber;
+value = "Hello"; // Valid
+value = 42;      // Valid
+value = true;    // Invalid</code>
+                </pre>
+            </section>
+            <section role="region" aria-label="Intersection Types">
+                <h2>Intersection Types</h2>
+                <p>An <strong>intersection type</strong> combines multiple types.</p>
+                <pre>
+                    <code>type Person = { name: string };
+type Employee = { jobTitle: string };
+type PersonEmployee = Person & Employee;
+const employee: PersonEmployee = {
+    name: "Alice",
+    jobTitle: "Developer"
+};</code>
+                </pre>
+            </section>
+            <section role="region" aria-label="Enum Types">
+                <h2>5. Enum Types</h2>
+                <p>Enums define named constants.</p>
+                <pre>
+                    <code>enum Color {
+    Red,
+    Green,
+    Blue
+}
+let favoriteColor: Color = Color.Green;
+console.log(favoriteColor); // Output: 1</code>
+                </pre>
+            </section>
+            <section role="region" aria-label="String Literal">
+                <h2>String Literal</h2>
+                <p>Literal types represent specific values, often used with unions.</p>
+                <ul>
+                    <li><strong>String Literal:</strong> Restricts to a specific string.</li>
+                    <pre>
+                        <code>let status: "success" | "error" = "success";</code>
+                    </pre>
+                </ul>
+            </section>
+            <section role="region" aria-label="Numeric and Boolean Literals">
+                <h2>Numeric and Boolean Literals</h2>
+                <p>Literal types represent specific values, often used with unions.</p>
+                <ul>
+                    <li><strong>Numeric Literal:</strong> Restricts to a specific number.</li>
+                    <pre>
+                        <code>let diceRoll: 1 | 2 | 3 | 4 | 5 | 6 = 3;</code>
+                    </pre>
+                    <li><strong>Boolean Literal:</strong> Restricts to <code>true</code> or <code>false</code>.</li>
+                    <pre>
+                        <code>let isActive: true = true;</code>
+                    </pre>
+                </ul>
+            </section>
+            <section role="region" aria-label="Generic Types">
+                <h2>6. Generic Types</h2>
+                <p>Generics create reusable code with type placeholders.</p>
+                <ul>
+                    <li><strong>Generic Types:</strong> Functions or classes that work with any type.</li>
+                    <pre>
+                        <code>function identity<T>(value: T): T {
+    return value;
+}
+let str = identity("Hello"); // T is string
+let num = identity(42); // T is number</code>
+                    </pre>
+                </ul>
+            </section>
+            <section role="region" aria-label="Generic Constraints">
+                <h2>Generic Constraints</h2>
+                <p>Generics create reusable code with type placeholders.</p>
+                <ul>
+                    <li><strong>Generic Constraints:</strong> Restrict types to meet requirements.</li>
+                    <pre>
+                        <code>function getLength<T extends { length: number }>(item: T): number {
+    return item.length;
+}
+let len1 = getLength("Hello"); // Works
+let len2 = getLength([1, 2, 3]); // Works</code>
+                    </pre>
+                </ul>
+            </section>
+            <section role="region" aria-label="Type Assertions">
+                <h2>7. Type Assertions</h2>
+                <p>Advanced types enable complex type manipulations.</p>
+                <ul>
+                    <li><strong>Type Assertions:</strong> Specify a value’s type when known.</li>
+                    <pre>
+                        <code>let value: any = "Hello";
+let strLength: number = (value as string).length;</code>
+                    </pre>
+                </ul>
+            </section>
+            <section role="region" aria-label="Non-null Assertion">
+                <h2>Non-null Assertion</h2>
+                <p>Advanced types enable complex type manipulations.</p>
+                <ul>
+                    <li><strong>Non-null Assertion:</strong> Asserts non-<code>null</code>/<code>undefined</code>.</li>
+                    <pre>
+                        <code>let element: HTMLElement | null = document.getElementById("app");
+let definitelyElement: HTMLElement = element!;</code>
+                    </pre>
+                </ul>
+            </section>
+            <section role="region" aria-label="Utility Types">
+                <h2>8. Utility Types</h2>
+                <div class="content-box">
+                    <p>Utility types transform or manipulate other types for complex definitions.</p>
+                </div>
+            </section>
+            <section role="region" aria-label="Partial">
+                <h3>Partial</h3>
+                <ul>
+                    <li><strong>Partial:</strong> Makes all properties optional.</li>
+                    <pre>
+                        <code>interface User {
+    id: number;
+    name: string;
+}
+let partialUser: Partial<User> = { name: "John" };</code>
+                    </pre>
+                </ul>
+            </section>
+            <section role="region" aria-label="Readonly">
+                <h3>Readonly</h3>
+                <ul>
+                    <li><strong>Readonly:</strong> Makes all properties read-only.</li>
+                    <pre>
+                        <code>interface User {
+    id: number;
+    name: string;
+}
+let readonlyUser: Readonly<User> = { id: 1, name: "John" };
+// readonlyUser.name = "Doe"; // Error</code>
+                    </pre>
+                </ul>
+            </section>
+            <section role="region" aria-label="Pick">
+                <h3>Pick</h3>
+                <ul>
+                    <li><strong>Pick:</strong> Selects specific properties.</li>
+                    <pre>
+                        <code>interface User {
+    id: number;
+    name: string;
+    email: string;
+}
+let pickedUser: Pick<User, "id" | "name"> = { id: 1, name: "John" };</code>
+                    </pre>
+                </ul>
+            </section>
+            <section role="region" aria-label="Omit">
+                <h3>Omit</h3>
+                <ul>
+                    <li><strong>Omit:</strong> Excludes specific properties.</li>
+                    <pre>
+                        <code>interface User {
+    id: number;
+    name: string;
+    email: string;
+}
+let omittedUser: Omit<User, "email"> = { id: 1, name: "John" };</code>
+                    </pre>
+                </ul>
+            </section>
+            <section role="region" aria-label="Summary">
+                <h2>Summary</h2>
+                <div class="content-box">
+                    <ul>
+                        <li><strong>Type Safety:</strong> Catches errors at compile time, reducing bugs.</li>
+                        <li><strong>Improved Readability:</strong> Explicit types enhance code clarity.</li>
+                        <li><strong>Enhanced Tooling:</strong> Better autocompletion and debugging.</li>
+                        <li><strong>Scalability:</strong> Supports large-scale apps with interfaces.</li>
+                        <li><strong>Modern Features:</strong> ES6+ support with plain JS output.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+    <script>
+        try {
+            Reveal.initialize({
+                hash: true,
+                controls: true,
+                progress: true,
+                center: true,
+                autoSlide: false,
+                transition: 'fade',
+                transitionSpeed: 'slow',
+                width: '100%',
+                height: '100%',
+                plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+            });
+        } catch (e) {
+            console.error("Reveal.js initialization failed:", e);
+        }
+    </script>
+</body>
 </html>
