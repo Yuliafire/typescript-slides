@@ -24,7 +24,7 @@
 						experience by detecting errors early in the development process and
 						providing improved tooling support.</div>
 				</section>
-				<section>
+				<!-- <section>
 					<h2>Why to use typescript?</h2>
 					<h3>Part 1</h3>
 					<div>
@@ -37,6 +37,24 @@
 							<li>
 								TypeScript's support for <strong>object-oriented programming</strong> concepts
 								facilitates the development of scalable and maintainable codebases.</li>
+						</ul>
+					</div>
+				</section> -->
+
+				<section>
+					<h2>Why Use TypeScript?</h2>
+					<h3>Part 1</h3>
+					<div>
+						<ul>
+							<li>
+								<strong>Catch errors early:</strong> TypeScript's static typing helps you spot mistakes while writing code, making your projects more reliable and easier to maintain.
+							</li>
+							<li>
+								<strong>Boost productivity:</strong> With features like smart code navigation, auto-completion, and refactoring tools, TypeScript makes coding faster and more enjoyable.
+							</li>
+							<li>
+								<strong>Write scalable code:</strong> TypeScript supports object-oriented programming, helping you build clean, organized, and scalable applications.
+							</li>
 						</ul>
 					</div>
 				</section>
@@ -53,7 +71,7 @@
 						</ul>
 					</div>
 				</section>
-	
+
 				<section>
 					<h2>Disadvantages of TypeScript over JavaScript</h2>
 					<ul>
@@ -66,7 +84,7 @@
 							pronounced, the additional overhead of TypeScript may outweigh its advantages.</li>
 					</ul>
 				</section>
-	
+
 				<section>
 					<h2>Syntax Differences: JavaScript vs TypeScript</h2>
 					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
@@ -76,11 +94,11 @@
 					   // No error, as JavaScript allows dynamic typing
 					   console.log(message);
 					</pre>
-	
+
 					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
 					   let message: string = "Hello, World!";
 					   // Type is explicitly defined
-					   // message = 42; 
+					   // message = 42;
 					   // Error: Type 'number' is not assignable to type 'string'
 					   console.log(message);
 					</pre>
@@ -127,7 +145,7 @@
 					 but runtime error if value is not a string
 					</pre>
 				</section>
-				
+
 				<section>
 					<h3>unknown</h3>
 					<p>The <code>unknown</code> type is a safer alternative to <code>any</code>. It requires type checking before usage.</p>
@@ -138,7 +156,7 @@
 				}
 					</pre>
 				</section>
-				
+
 				<section>
 					<h3>never</h3>
 					<p>The <code>never</code> type represents values that never occur, such as functions that throw errors or infinite loops.</p>
@@ -158,8 +176,115 @@
 				}
 					</pre>
 				</section>
-	
-	
+
+				<section>
+					<h2>Union Types</h2>
+					<p>
+						In TypeScript, a <strong>union type</strong> allows a value to be one of several specified types. It is useful when a variable can hold multiple types of values.
+					</p>
+					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
+						// Union type example
+						type StringOrNumber = string | number;
+				
+						let value: StringOrNumber;
+				
+						value = "Hello"; // Valid
+						value = 42;      // Valid
+						value = true;    // Invalid, not part of the union
+					</pre>
+				</section>
+				
+				<section>
+					<h2>Intersection Types</h2>
+					<p>
+						An <strong>intersection type</strong> combines multiple types into one. A value of an intersection type must satisfy all the combined types simultaneously.
+					</p>
+					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
+						// Intersection type example
+						type Person = { name: string };
+						type Employee = { jobTitle: string };
+				
+						type PersonEmployee = Person & Employee;
+				
+						const employee: PersonEmployee = {
+							name: "Alice",
+							jobTitle: "Developer"
+						}; // Valid because it satisfies both `Person` and `Employee`
+					</pre>
+				</section>
+
+				<section>
+					<h2>Comparing Interfaces and Type Aliases</h2>
+					<p>
+						In TypeScript, both <code>interface</code> and <code>type</code> are used to define the structure of data. While they share similarities, they also have distinct features that make them suitable for different use cases. 
+					</p>
+					<p>
+						This guide explores the key differences between interfaces and type aliases, including their ability to extend, merge, and represent various types.
+					</p>
+				</section>
+
+				<section>
+					<h2>Interfaces Can Be Extended</h2>
+					<p>
+						<strong>Interfaces</strong> in TypeScript can be extended using the <code>extends</code> keyword. This allows you to create new interfaces by building on existing ones.
+					</p>
+					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
+						interface Person {
+							name: string;
+							age: number;
+						}
+				
+						interface Employee extends Person {
+							jobTitle: string;
+						}
+				
+						const employee: Employee = {
+							name: "Alice",
+							age: 30,
+							jobTitle: "Software Engineer"
+						};
+					</pre>
+				</section>
+				
+				<section>
+					<h2>Interfaces Support Declaration Merging</h2>
+					<p>
+						<strong>Interfaces</strong> can be reopened and merged. This means you can add new properties to an existing interface by declaring it again.
+					</p>
+					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
+						interface Person {
+							name: string;
+						}
+
+						// Declaration merging
+						interface Person {
+							middleName?: string;
+						}
+
+						const person: Person = {
+							name: "Alice",
+							middleName: "Marie"
+						};
+					</pre>
+				</section>
+
+				<section>
+					<h2>Type Aliases Can Represent Primitives, Unions, Tuples, and More</h2>
+					<p>
+						<strong>Type aliases</strong> are more flexible than interfaces. They can represent primitives, unions, tuples, and other complex types.
+					</p>
+					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
+						// Union type
+						type StringOrNumber = string | number;
+				
+						const value: StringOrNumber = 42;
+				
+						// Tuple type
+						type Point = [number, number];
+				
+						const point: Point = [10, 20];
+					</pre>
+				</section>
 	
 				<section>
 					<h3>Union Types</h3>
@@ -178,34 +303,30 @@
 					<h2>Intersection Types</h2>
 					<p>Intersection types combine multiple types into one. A variable must satisfy all the combined types.
 					</p>
-					<!-- <pre> -->
 	
 					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
 						interface Person {
 							name: string;
 						}
-						
+
 						interface Employee {
 							employeeId: number;
 						}
-						
+
 						type EmployeePerson = Person & Employee;
-						
 						const employee: EmployeePerson = {
 							name: "Alice",
 							employeeId: 123
 						};
 					</pre>
 				</section>
-	
-	
-	
+
 				<section>
 					<h2>Composite Types</h2>
 					<p>Composite types allow grouping multiple values together.</p>
 					<p>They include ARRAYS and TUPLES</p>
 				</section>
-	
+
 				<section>
 					<h3>Array</h3>
 					<p>An array is a collection of elements of the same type.</p>
@@ -216,7 +337,7 @@
 					is not assignable to parameter of type 'number'
 					</pre>
 				</section>
-	
+
 				<section>
 					<h3>Tuple</h3>
 					<p>A tuple is a fixed-length array where each element can have a different type.</p>
@@ -225,8 +346,7 @@
 					// person = [25, "Alice"]; // Error: Type 'number' is not assignable to type 'string'
 					</pre>
 				</section>
-	
-	
+
 				<section>
 					<h2>Enum Types</h2>
 					<p>Enums allow you to define a set of named constants.</p>
@@ -236,22 +356,11 @@
 						Green,
 						Blue
 					}
-	
 					let favoriteColor: Color = Color.Green;
 					console.log(favoriteColor); // Output: 1
 					</pre>
 				</section>
-	
-		
-				<section>
-					<h2>Real-World Impact</h2>
-					<ul>
-						<li>Fewer runtime errors</li>
-						<li>Faster debugging with type errors</li>
-						<li>Better collaboration in large teams</li>
-					</ul>
-				</section>
-				
+
 				<section>
 				  <h2>Summary</h2>
 				  <p>TypeScript offers several advantages over JS:</p>
