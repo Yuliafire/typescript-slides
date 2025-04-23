@@ -58,22 +58,29 @@
             font-weight: 700;
             margin: 1vmin auto;
             text-align: center;
+			font-size: 6.5rem;
         }
         .reveal .slides section h2, .reveal .slides section h3 {
             color: #1e3a8a !important;
             font-weight: 700;
+			font-size: 64px;
             margin: 1vmin auto;
             text-align: center;
         }
         .reveal .slides section h2 {
             font-size: clamp(2rem, 4vw, 3.2rem);
+			font-size: 5rem;
         }
         .reveal .slides section h3 {
             font-size: clamp(1.5rem, 3vw, 2.5rem);
+			font-size: 5rem;
+
         }
+        
         p, ul {
             color: #1f2937;
             font-size: clamp(1.2rem, 2vw, 1.8rem);
+			font-size: 4rem;
             line-height: 1.5;
             margin: 1vmin auto;
             text-align: center;
@@ -89,14 +96,14 @@
             margin-bottom: 0.5vmin;
             text-align: left;
         }
-        ul li::before {
+        /* ul li::before {
             content: "✓";
             position: absolute;
             left: 0;
             color: #2dd4bf;
             font-weight: bold;
-            font-size: clamp(0.8rem, 1.5vw, 1.2rem);
-        }
+            font-size: clamp(0.8rem, 1.5vw, 1.2rem); */
+        /* } */
         .reveal .slides pre {
             background: #e5e7eb !important;
             padding: 2vmin !important;
@@ -106,14 +113,17 @@
             white-space: normal;
             word-break: break-all;
             overflow-wrap: break-word;
-            overflow: hidden !important;
+            /* overflow: hidden !important;
             overflow-x: hidden !important;
-            overflow-y: hidden !important;
-            max-height: none !important;
+            overflow-y: hidden !important; */
+            /* max-height: none !important; */
             font-size: clamp(1rem, 1.8vw, 1.5rem);
+			font-size: 3rem;
             line-height: 1.3;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
             text-align: left;
+			width: 100%;
+			height: 100%;
         }
         code {
             font-family: 'Fira Code', 'Consolas', monospace;
