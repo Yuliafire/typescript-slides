@@ -17,30 +17,16 @@
 		<div class="reveal">
 			<div class="slides">
 				<section>
-					<h1>What is TypeScript</h1>
+					<h1>TypeScript: Unlocking Type Safety</h1>
+				</section>
+				<section>
+					<h2>What is TypeScript?</h2>
 					<div>TypeScript, a superset of JavaScript developed by Microsoft,
 						is a statically typed language that compiles to plain JavaScript.
 						By introducing static typing, TypeScript enhances the development
 						experience by detecting errors early in the development process and
 						providing improved tooling support.</div>
 				</section>
-				<!-- <section>
-					<h2>Why to use typescript?</h2>
-					<h3>Part 1</h3>
-					<div>
-						<ul>
-							<li>TypeScript's <strong>static typing</strong> feature enables early error detection and enhances
-								code quality and maintainability.</li>
-							<li>TypeScript offers <strong>superior tooling support</strong> with features like code
-								navigation, intelligent code completion, and refactoring tools, improving developer
-								productivity.</li>
-							<li>
-								TypeScript's support for <strong>object-oriented programming</strong> concepts
-								facilitates the development of scalable and maintainable codebases.</li>
-						</ul>
-					</div>
-				</section> -->
-
 				<section>
 					<h2>Why Use TypeScript?</h2>
 					<h3>Part 1</h3>
@@ -59,7 +45,7 @@
 					</div>
 				</section>
 				<section>
-					<h2>Why to use typescript?</h2>
+					<h2>Why use typescript?</h2>
 					<h3>Part 2</h3>
 					<div>
 						<ul>
@@ -109,7 +95,7 @@
 					<p>TypeScript extends JavaScript by adding a rich type system.
 						While JavaScript primarily uses dynamic typing,
 						TypeScript introduces additional types such as enums, tuples,
-						and union/intersection types. These features enable developers
+						and union, intersection types. These features enable developers
 						to write safer and more maintainable code.</p>
 				</section>
 	
@@ -166,7 +152,7 @@
 				}
 					</pre>
 				</section>
-				
+
 				<section>
 					<h3>void</h3>
 					<p>The <code>void</code> type represents the absence of a value, typically used for functions that do not return anything.</p>
@@ -185,15 +171,15 @@
 					<pre style="display: flex; justify-content: center; margin: 0; text-align: left;">
 						// Union type example
 						type StringOrNumber = string | number;
-				
+
 						let value: StringOrNumber;
-				
+
 						value = "Hello"; // Valid
 						value = 42;      // Valid
 						value = true;    // Invalid, not part of the union
 					</pre>
 				</section>
-				
+
 				<section>
 					<h2>Intersection Types</h2>
 					<p>
@@ -203,9 +189,8 @@
 						// Intersection type example
 						type Person = { name: string };
 						type Employee = { jobTitle: string };
-				
+
 						type PersonEmployee = Person & Employee;
-				
 						const employee: PersonEmployee = {
 							name: "Alice",
 							jobTitle: "Developer"
@@ -214,7 +199,7 @@
 				</section>
 
 				<section>
-					<h2>Comparing Interfaces and Type Aliases</h2>
+					<h2>Comparing Interfaces & Type Aliases</h2>
 					<p>
 						In TypeScript, both <code>interface</code> and <code>type</code> are used to define the structure of data. While they share similarities, they also have distinct features that make them suitable for different use cases. 
 					</p>
@@ -363,13 +348,13 @@
 
 				<section>
 				  <h2>Summary</h2>
-				  <p>TypeScript offers several advantages over JS:</p>
+				  <!-- <p>TypeScript offers several advantages over JS:</p> -->
 				<ul>
 				   <li><strong>Type Safety:</strong> Helps catch errors at compile time, reducing runtime bugs.</li>
 					<li><strong>Improved Code Readability:</strong> Explicit types make the code easier to understand and maintain.</li>
 					<li><strong>Enhanced Tooling:</strong> Provides better autocompletion, refactoring, and debugging support in IDEs.</li>
 					<li><strong>Scalability:</strong> Facilitates large-scale application development with features like interfaces and type annotations.</li>
-					<li><strong>Modern JavaScript Features:</strong> Supports ES6+ features and compiles to plain JavaScript for compatibility.</li>
+					<li><strong>Modern JavaScript Features:</strong> Supports ES6+ features and compiles to plain JS.</li>
 				 </ul>
 			   </section>
 			</div>
